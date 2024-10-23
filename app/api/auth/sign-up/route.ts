@@ -5,15 +5,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const {
-      name,
-      email,
-      password,
-      numeroTelefono,
-      apellido,
-      archivo,
-      isAdmin,
-    } = await req.json();
+    const { name, email, password, phone, lastName, file, isAdmin } =
+      await req.json();
 
     const user = await db.user.findUnique({
       where: {
@@ -30,14 +23,14 @@ export async function POST(req: Request) {
         name: name,
         email: email,
         password: passwordHas,
-        numeroTelefono: numeroTelefono,
-        apellido: apellido,
-        archivo: archivo,
+        phone,
+        lastName,
+        file,
         isAdmin: isAdmin,
         role: isAdmin ? "ADMIN" : "USER",
       },
     });
-    return NextResponse.json(data)
+    return NextResponse.json(data);
   } catch (error) {
     if (error instanceof AuthError) {
       return { error: error.cause?.err?.message };

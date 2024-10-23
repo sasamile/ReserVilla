@@ -23,6 +23,7 @@ import { oswald, oswald2 } from "@/lib/font";
 import FormWrapper from "./Form-Wraper";
 import FormLogin from "./form-login";
 import FormRegister from "./form-register";
+import { AccountCreationStepper } from "./account-creation-stepper";
 
 function FormAuth() {
   const [ischange, setIsChange] = useState<"login" | "register">("login");
@@ -30,7 +31,7 @@ function FormAuth() {
   return (
     <div>
       <FormWrapper ischange={ischange} setIsChange={setIsChange}>
-        {ischange === "login" ? <FormLogin /> : <FormRegister />}
+        {ischange === "login" ? <FormLogin /> : <AccountCreationStepper />}
       </FormWrapper>
     </div>
   );

@@ -19,7 +19,6 @@ import { LoginSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
-import { Fascinate } from "next/font/google";
 
 function FormLogin() {
   const router = useRouter();
@@ -69,7 +68,7 @@ function FormLogin() {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="py-5 border-2 border-green-300 focus:border-green-500 bg-transparent"
+                    className="border-[#525252]"
                     placeholder="shadcn"
                     {...field}
                   />
@@ -89,7 +88,7 @@ function FormLogin() {
                   <PasswordInput
                     field={field}
                     isSubmitting={isSubmitting}
-                    className="py-5 border-2 border-green-300 focus:border-green-500 focus:ring focus:ring-green-200"
+                    className="border-[#525252]"
                   />
                 </FormControl>
                 <FormDescription className="text-[13.5px]">

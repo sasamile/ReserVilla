@@ -2,14 +2,14 @@ import Image from "next/image";
 import React from "react";
 import FormLogin from "./_components/form";
 import FormAuth from "./_components/form";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 function AuthPages() {
   return (
     <div className="relative flex">
-      <div className="w-1/2 h-screen bg-black">
-        {/* Formulario de login */}
+      <ScrollArea className="w-1/2 h-screen bg-black">
         <FormAuth />
-      </div>
+      </ScrollArea>
       <div className="relative w-1/2 h-screen">
         <Image
           src="/image/bg-login2.jpg"

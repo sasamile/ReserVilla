@@ -18,11 +18,11 @@ function FormWrapper({ children, setIsChange, ischange }: FormWrapper) {
 
       <div className=" pt-8 px-16">
   
-        <h2 className={` text-4xl py-4 font-bold`}>
-          {ischange === "login" ? <>Inicia sesión</> : <>Registrarse</>}
+        <h2 className={` text-3xl py-4 font-bold`}>
+          {ischange === "login" ? <>Inicia sesión</> : <>Crea una cuenta</>}
         </h2>
-        <p>
-          Si no tienes una cuenta?{" "}
+        <p className="text-muted/70">
+          No tienes una cuenta?{" "}
           <span
             className="text-green-500 cursor-pointer"
             onClick={() =>

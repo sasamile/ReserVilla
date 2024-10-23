@@ -3,28 +3,28 @@
 import { UploadFileResponse } from "@/types";
 import { utapi } from "./uploadthing";
 import { formatImageUrl } from "@/lib/format-url";
-
-
+import { FileEsque } from "uploadthing/types";
 
 export async function uploadFiles(formData: FormData) {
-    try {
-      const file = formData.get("file");
-  
-      if (file instanceof File) {
-        const response: UploadFileResponse = await utapi.uploadFiles(file);
-  
-        if (response.data) {
-          return { success: true, data: response.data };
-        }
-  
-        return { success: false };
-      } else {
-        throw new Error("Invalid file");
+  try {
+    const file = formData.get("file") as FileEsque;
+
+    if (file instanceof File) {
+      const response: UploadFileResponse = await utapi.uploadFiles(file);
+
+      if (response.data) {
+        return { success: true, data: response.data };
       }
-    } catch (error: any) {
-      console.log(error.message);
+
+      return { success: false, message: "Something went wrong" };
+    } else {
+      // throw new Error("Invalid file");
+      return { success: false, message: "No files found for upload" };
     }
+  } catch (error: any) {
+    return { sucess: false, message: "" };
   }
+}
 
 export async function deleteImageFile(imageUrl: string) {
   try {

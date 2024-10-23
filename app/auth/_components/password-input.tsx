@@ -56,7 +56,6 @@ export function PasswordInput({
 
   return (
     <div className="relative flex items-center justify-between">
-
       <Input
         className={cn(" pr-11", className)}
         type={showPassword ? "text" : "password"}
@@ -68,12 +67,12 @@ export function PasswordInput({
         variant="ghost"
         type="button"
         onClick={() => setShowPassword((current) => !current)}
-        className="absolute right-1 size-8 hover:bg-transparent"
+        className="absolute right-1 hover:bg-transparent hover:text-white/80 p-0 mr-2"
       >
         {showPassword ? (
-          <EyeOff className="shrink-0" />
+          <EyeOff className="min-w-5 min-h-5 shrink-0" />
         ) : (
-          <Eye className="shrink-0" />
+          <Eye className="min-w-5 min-h-5 shrink-0" />
         )}
       </Button>
     </div>

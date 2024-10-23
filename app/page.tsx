@@ -4,7 +4,7 @@ import React from "react";
 
 function page() {
   return (
-    <div className="h-screen bg-black overflow-hidden relative w-full">
+    <div className="h-full bg-black overflow-hidden relative w-full">
 
       <Navbar />
       <Hero />
