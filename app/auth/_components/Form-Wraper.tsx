@@ -1,6 +1,6 @@
-import { oswald2 } from "@/lib/font";
-import Image from "next/image";
-import React from "react";
+"use client";
+
+import { Logo } from "@/components/logo";
 
 interface FormWrapper {
   children: React.ReactNode;
@@ -10,19 +10,16 @@ interface FormWrapper {
 
 function FormWrapper({ children, setIsChange, ischange }: FormWrapper) {
   return (
-    <div className="p-8 text-white">
-      <div className="flex jus gap-4 text-white font-bold items-center ">
-        <Image src="/image/Logo.svg" width={60} height={80} alt="Logo" />
-        <h2 className="text-2xl">ReserVilla</h2>
-      </div>
-
-      <div className=" pt-8 px-16">
-  
-        <h2 className={` text-3xl py-4 font-bold`}>
+    <div className="ms:p-8 xs:p-6 p-4 text-white h-full">
+      <div className="pt-8 xl:px-16 w-fit mx-auto">
+        <Logo />
+        <h2 className="text-3xl py-4 font-bold mt-6">
           {ischange === "login" ? <>Inicia sesión</> : <>Crea una cuenta</>}
         </h2>
-        <p className="text-muted/70">
-          No tienes una cuenta?{" "}
+        <p className="text-muted/70 select-none">
+          {ischange === "login"
+            ? "No tienes una cuenta?"
+            : "Ya tienes una cuenta?"}{" "}
           <span
             className="text-green-500 cursor-pointer"
             onClick={() =>

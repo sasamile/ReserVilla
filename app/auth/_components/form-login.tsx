@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import React from "react";
+import React, { useTransition } from "react";
 import { PasswordInput } from "./password-input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -19,8 +19,10 @@ import { LoginSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import { Loader2 } from "lucide-react";
 
 function FormLogin() {
+  const [isLoading, startTransition] = useTransition();
   const router = useRouter();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -40,22 +42,28 @@ function FormLogin() {
   //   }
   // }, [session]);
 
-  async function onSubmit(values: z.infer<typeof LoginSchema>) {
-    try {
-      const data = await axios.post("/api/auth/sign-in", values);
-      toast.success(`Bienvenido ${data.data.user.name}`);
-      router.push("/dashboard");
-    } catch (error: any) {
-      if (error.response && error.response.data && error.response.data.error) {
-        toast.error(error.response.data.error);
-      } else {
-        toast.error("Ocurrió un error al iniciar sesión");
+  function onSubmit(values: z.infer<typeof LoginSchema>) {
+    startTransition(async () => {
+      try {
+        const data = await axios.post("/api/auth/sign-in", values);
+        toast.success(`Bienvenido ${data.data.user.name}`);
+        router.push("/dashboard");
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error("Ocurrió un error al iniciar sesión");
+        }
       }
-    }
+    });
   }
 
   return (
-    <div className="pt-12 w-[450px]">
+    <div className="pt-8 max-w-[500px] w-full">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -83,7 +91,7 @@ function FormLogin() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-700">Contraseña</FormLabel>
+                <FormLabel className="text-gray-300">Contraseña</FormLabel>
                 <FormControl>
                   <PasswordInput
                     field={field}
@@ -100,9 +108,10 @@ function FormLogin() {
             )}
           />
           <Button
-            disabled={!isValid || isSubmitting}
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded"
+            disabled={!isValid || isSubmitting || isLoading}
+            className="w-full h-10 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full"
           >
+            {isLoading && <Loader2 className="size-4 animate-spin" />}
             Iniciar
           </Button>
         </form>

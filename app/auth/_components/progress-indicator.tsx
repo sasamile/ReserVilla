@@ -13,7 +13,7 @@ export function ProgressIndicator({
         <div
           key={i}
           className={`w-full h-2 rounded-full ${
-            i < step ? "bg-muted" : "bg-primary"
+            i < step ? "bg-green-600" : "bg-primary"
           }`}
         />
       ))}

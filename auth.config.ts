@@ -10,7 +10,7 @@ export default {
     Credentials({
       async authorize(credentials) {
         try {
-          const { success, data, error } = LoginSchema.safeParse(credentials);
+          const { success, data } = LoginSchema.safeParse(credentials);
 
           if (!success) {
             throw new Error("Credenciales inválidas");

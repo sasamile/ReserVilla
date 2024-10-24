@@ -1,23 +1,23 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
+import { Role } from "@prisma/client";
+import { Check } from "lucide-react";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Check } from "lucide-react";
 import { rolesInfo } from "@/constants";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion"; // Importa motion
-import { Role } from "@prisma/client";
+import { useAccountTypeStore } from "@/stores/useAccountTypeStore";
 
 interface AccountTypeStepProps {
   accountType: Role | null;
-  setAccountType: (type: Role) => void;
 }
 
-export function AccountTypeStep({
-  accountType,
-  setAccountType,
-}: AccountTypeStepProps) {
+export function AccountTypeStep({ accountType }: AccountTypeStepProps) {
+  const { setAccountType } = useAccountTypeStore();
+
   return (
     <RadioGroup
       onValueChange={(value) => setAccountType(value as Role)}
@@ -62,10 +62,10 @@ export function AccountTypeStep({
                 </motion.div>
               )}
             </AnimatePresence>
-            <CardContent className="flex items-center space-x-4 p-4">
+            <CardContent className="flex justify-start items-center gap-4 p-4">
               <RadioGroupItem value={value} id={value} className="sr-only" />
               <div className="p-3 border border-muted-foreground rounded-md">
-                <Icon className="size-6 text-white shrink-0 text-primary" />
+                <Icon className="size-6 text-white shrink-0 text-primary m-0" />
               </div>
               <div className="flex-grow cursor-pointer">
                 <h3 className="text-white text-lg font-semibold">{title}</h3>

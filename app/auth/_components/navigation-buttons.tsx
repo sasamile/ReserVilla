@@ -1,18 +1,26 @@
-import { Button } from "@/components/ui/button"
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+"use client";
+
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 interface NavigationButtonsProps {
-  step: number
-  handleBack: () => void
-  handleContinue: () => void
-  isNextDisabled: boolean
+  step: number;
+  handleBack: () => void;
+  handleContinue: () => void;
+  isNextDisabled: boolean;
 }
 
-export function NavigationButtons({ step, handleBack, handleContinue, isNextDisabled }: NavigationButtonsProps) {
+export function NavigationButtons({
+  step,
+  handleBack,
+  handleContinue,
+  isNextDisabled,
+}: NavigationButtonsProps) {
   return (
     <div className="flex justify-between">
       {step > 1 && (
-        <Button 
+        <Button
           variant="outline"
           onClick={handleBack}
           className="flex items-center bg-muted-foreground/20 border-none hover:bg-muted-foreground/20 hover:text-white"
@@ -21,8 +29,8 @@ export function NavigationButtons({ step, handleBack, handleContinue, isNextDisa
           Atrás
         </Button>
       )}
-      {step < 4 && (
-        <Button 
+      {step < 2 && (
+        <Button
           onClick={handleContinue}
           disabled={isNextDisabled}
           className="flex items-center ml-auto bg-green-600 hover:bg-green-700"
@@ -32,5 +40,5 @@ export function NavigationButtons({ step, handleBack, handleContinue, isNextDisa
         </Button>
       )}
     </div>
-  )
+  );
 }
